@@ -1,0 +1,259 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {apply plugin: 'java'
+apply plugin: 'application'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
+}
+
+// Default mainClass (optional)
+application {
+    mainClass = 'org.example.App'
+}
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
+}
+
+// Default mainClass (optional)
+application {
+    mainClass = 'org.example.App'
+}
+
+// Folder Create, Copy and Rename Task
+tasks.register("copyDirectory", Copy) {
+    file("target-folder").mkdirs()
+    from("source-folder")
+    into("target-folder/renamed-folder")
+    doLast {apply plugin: 'java'
+apply plugin: 'application'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
+}
+
+// Default mainClass (optional)
+application {
+    mainClass = 'org.example.App'
+}
+        println "Directory Created and Copied."
+    }
+}
+
+// // Rename Folder Task
+// tasks.register("renameFolder") {
+//     from("sourceFolder")
+//     into(".") 
+//     rename { fileName ->
+//         "renamedFolder"
+//     }
+// }
+
+// // Folder Create, Copy and Rename Task
+// task copyDirectory(type: Copy) {
+//     file("target-folder").mkdirs()
+//     from "source-folder"
+//     into "target-folder/source-folder"
+// }
+
+//Delete Folder Task
+
+task deleteFolder(type: Delete) {
+    delete "target-folder/source-folder"
+}
+
+//Zip Creation Task
+task createZip(type: Zip) {
+    file("ZipFolder").mkdirs()
+    from "data-folder"
+    archiveFileName = 'data.zip'
+    destinationDirectory = file('ZipFolder')
+}
+
+task echoFile(type: Exec) {
+    commandLine "cmd", "/c", "echo 'Hello World'"
+}
+task runShell(type: Exec) {
+    commandLine 'cmd', '-c', 'pwd'
+}
+task createFolder(type: Exec) {
+    commandLine "cmd", "/c", "mkdir myNewFolder"
+}
+
+task runCmd(type: Exec) {
+    commandLine "cmd", "/c", "dir"
+}
+task deleteFolderCmd(type: Exec) {
+    commandLine "cmd", "/c", "rmdir /S /Q myNewFolder"
+}
+task createFile(type: Exec) {
+    commandLine "cmd", "/c", "echo Hello World > myFile.txt"
+}
+task renameFile(type: Exec) {
+    commandLine "cmd", "/c", "ren myFile.txt myRenamedFile.txt"
+}
+task deleteFile(type: Exec) {
+    commandLine "cmd", "/c", "del myRenamedFile.txt"
+}
+task runbat(type: Exec) {
+    commandLine "cmd", "/c", "myscript.bat"
+}
+// Don't supporting sh script in windows
+// task runScript(type: Exec) {
+//     commandLine "sh", "myscript.sh"
+// }
+
+task runJava(type: Exec) {
+    commandLine "java", "-version"
+}
+
+tasks.register('runMultiCmd', Exec) {
+    commandLine "cmd", "/c", "cd && dir && echo Finished"
+}
+
+
+task step1(type: Exec) {
+    commandLine "cmd", "/c", "echo Step 1 Running"
+}
+
+task step2(type: Exec) {
+    commandLine "cmd", "/c", "echo Step 2 Running"
+}
+
+task step3(type: Exec) {
+    commandLine "cmd", "/c", "echo Step 3 Running"
+}
+step1.finalizedBy(step2)
+step2.finalizedBy(step3)
+
+
+task gitClone(type: Exec) {
+    commandLine "git", "clone", "https://github.com/Thiya2001/New-Project"
+}
+
+task gitBranch(type: Exec) {
+    commandLine "git", "checkout", "-b", "New_Branch"
+}
+
+task gitAdd(type: Exec) {
+    commandLine "git", "add", "."
+}
+
+task gitStatus(type: Exec) {
+    commandLine "git", "status"
+}
+
+task gitRemote(type: Exec) {
+    commandLine "git", "remote", "add", "origin", "https://github.com/Thiya2001/New-Project"
+}
+
+task gitCommit(type: Exec) {
+    commandLine "git", "commit", "-m", "Initial Commit"
+}
+
+task gitPush(type: Exec) {
+    commandLine "git", "push", "-u", "origin", "New_Branch"
+}
+
+task mainFlow(type: Exec) {
+    commandLine "cmd", "/c", "git checkout main"
+}
+
+task mainPull(type: Exec, dependsOn: mainFlow) {
+    commandLine "cmd", "/c", "git pull origin main"
+}
+
+task mergeBranch(type: Exec, dependsOn: mainPull) {
+    commandLine "cmd", "/c", "git merge New_Branch"
+}
+
+task mainPush(type: Exec, dependsOn: mergeBranch) {
+    commandLine "cmd", "/c", "git push origin main"
+}
+
+tasks.register('runApp', JavaExec) {
+    mainClass = 'org.example.App'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+tasks.register('runCreateArrayAntiDiagonalsSquareMatrix', JavaExec) {
+    mainClass = 'org.example.CreateArrayAntiDiagonalsSquareMatrix'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+tasks.register('runFindAllPairsOfElementsAnArray', JavaExec) {
+    mainClass = 'org.example.FindAllPairsOfElementsAnArray'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+tasks.register('runFindAllUniqueTripletsSumOf3Element', JavaExec) {
+    mainClass = 'org.example.FindAllUniqueTripletsSumOf3Element'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+tasks.register('runFindCommonBetween2ArraysOnInteger', JavaExec) {
+    mainClass = 'org.example.FindCommonBetween2ArraysOnInteger'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+tasks.register('runFindCommonBetween2ArraysOnString', JavaExec) {
+    mainClass = 'org.example.FindCommonBetween2ArraysOnString'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+tasks.register('runFindCommonElementsFromThreeSorted', JavaExec) {
+    mainClass = 'org.example.FindCommonElementsFromThreeSorted'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+tasks.register('runFindDuplicateValuesOfArrayOfInteger', JavaExec) {
+    mainClass = 'org.example.FindDuplicateValuesOfArrayOfInteger'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+tasks.register('runFindDuplicateValuesOfArrayOfString', JavaExec) {
+    mainClass = 'org.example.FindDuplicateValuesOfArrayOfString'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+tasks.register('runSecondLargestElementAnArray', JavaExec) {
+    mainClass = 'org.example.SecondLargestElementAnArray'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+tasks.register('runSecondSmallestElementAnArray', JavaExec) {
+    mainClass = 'org.example.SecondSmallestElementAnArray'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+// Master task to run all programs sequentially
+tasks.register('runAll') {
+    dependsOn 'runApp',
+              'runCreateArrayAntiDiagonalsSquareMatrix',
+              'runFindAllPairsOfElementsAnArray',
+              'runFindAllUniqueTripletsSumOf3Element',
+              'runFindCommonBetween2ArraysOnInteger',
+              'runFindCommonBetween2ArraysOnString',
+              'runFindCommonElementsFromThreeSorted',
+              'runFindDuplicateValuesOfArrayOfInteger',
+              'runFindDuplicateValuesOfArrayOfString',
+              'runSecondLargestElementAnArray',
+              'runSecondSmallestElementAnArray'
+}
+defaultTasks 'runAll', 'test', 'copyDirectory', 'deleteFolder', 'createZip', 'echoFile', 'runShell', 'createFolder', 'runCmd', 'deleteFolderCmd', 'createFile', 'renameFile', 'deleteFile', 'runbat', 'runJava', 'runMultiCmd', 'step1'
+
+
+
+
