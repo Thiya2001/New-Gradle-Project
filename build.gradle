@@ -149,39 +149,48 @@ task gitBranch(type: Exec) {
 }
 
 task gitAdd(type: Exec) {
+    workingDir "New-Project"
     commandLine "git", "add", "."
 }
 
 task gitStatus(type: Exec) {
+    workingDir "New-Project"
     commandLine "git", "status"
 }
 
 task gitRemote(type: Exec) {
+    workingDir "New-Project"
     commandLine "git", "remote", "add", "origin", "https://github.com/Thiya2001/New-Project"
 }
 
 task gitCommit(type: Exec) {
+    workingDir "New-Project"
     commandLine "git", "commit", "-m", "Initial Commit"
 }
 
 task gitPush(type: Exec) {
+    workingDir "New-Project"
     commandLine "git", "push", "-u", "origin", "New_Branch"
 }
 
 task mainFlow(type: Exec) {
-    commandLine "cmd", "/c", "git checkout main"
+    workingDir "New-Project"
+    commandLine "git", "checkout", "main"
 }
 
-task mainPull(type: Exec, dependsOn: mainFlow) {
-    commandLine "cmd", "/c", "git pull origin main"
+task mainPull(type: Exec) {
+    workingDir "New-Project"
+    commandLine "git", "pull", "origin", "main"
 }
 
-task mergeBranch(type: Exec, dependsOn: mainPull) {
-    commandLine "cmd", "/c", "git merge New_Branch"
+task mergeBranch(type: Exec) {
+    workingDir "New-Project"
+    commandLine "git", "merge", "New_Branch"
 }
 
-task mainPush(type: Exec, dependsOn: mergeBranch) {
-    commandLine "cmd", "/c", "git push origin main"
+task mainPush(type: Exec) {
+    workingDir "New-Project"
+    commandLine "git", "push", "origin", "main"
 }
 
 tasks.register('runApp', JavaExec) {
