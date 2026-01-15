@@ -144,6 +144,7 @@ task gitClone(type: Exec) {
 }
 
 task gitBranch(type: Exec) {
+    workingDir "New-Project"
     commandLine "git", "checkout", "-b", "New_Branch"
 }
 
